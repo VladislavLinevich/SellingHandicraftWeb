@@ -1,0 +1,32 @@
+.profile-container {
+    max-width: 1000px;
+    margin: 0px auto;
+}
+
+.profile-container__title {
+    font-family: 'Charter';
+    font-size: 42px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.start-btn {
+    text-decoration: none;
+    font-family: 'Arial';
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 220px;
+    border-radius: 30px;
+    border-width: 2px;
+    border-style: solid;
+    cursor: pointer;
+    user-select: none;
+    color: #000000;
+}
+
+.start-btn:hover {
+    box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.445)
+}

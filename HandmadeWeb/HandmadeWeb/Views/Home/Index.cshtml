@@ -1,0 +1,63 @@
+﻿@using HandmadeWeb.Entities
+@model HomeViewModel;
+@{
+    string rating;
+    var mainCategories = ViewData["MainCategories"] as List<Category>;
+    var products = ViewData["Products"] as Dictionary<string, List<Product>>;
+}
+
+@section Links {
+    <link rel="stylesheet" href="~/css/main-page.css" />
+}
+
+<div class="main-categories">
+    <h1> Интересные категории</h1>
+    <div class="main-categories__list">
+        <div class="main-categories__list__color"></div>
+        <div class="main-categories__list__items">
+            @for(int i = 0; i < 5; i++)
+            {
+                <a class="main-categories__category" asp-controller="Category" asp-action="Index" asp-route-category=@mainCategories[i].Id>
+                    <img class="main-categories__category__img" src="@Url.Content(mainCategories[i].Image)" alt="...">
+                    <p class="main-categories__category__title"> @mainCategories[i].Name</p>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+@foreach (var categoryProduct in Model.products){
+    <div class="category">
+        <a class="category__name" asp-controller="Category" asp-action="Index" asp-route-category=@mainCategories.FirstOrDefault(c => c.Name == @categoryProduct.Key).Id>@categoryProduct.Key ></a>
+        <div class="wrap-row">
+            @foreach (var product in categoryProduct.Value)
+            {
+                <a class="product" href="product-detail.html">
+                    <img class="product__img" src="@Url.Content(product.Image)" alt="...">
+                    <div class="product__rating">
+                        <p class="product__rating-score">
+                            @{
+                                var productRating = Model.reviews.Where(r => r.ProductId == product.Id).ToList();
+                                if (productRating.Count != 0)
+                                {
+                                    rating = productRating.Average(r => r.Rating).ToString("F1");
+                                } else
+                                {
+                                    rating = "—";
+                                }
+                            }
+                            @rating &starf;
+                        </p>
+                    </div>
+                    <div class="product__price">
+                        <p class="product__price-score">@product.Price.ToString("F2") руб.</p>
+                    </div>
+                    <p class="product__title"> @product.Name</p>
+                    <p class="product__seller"> @Model.users.FirstOrDefault(u => u.Id == product.UserId).UserName</p>
+                </a>
+            }
+           
+           
+        </div>
+    </div>
+}

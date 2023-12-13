@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MenuItem>
+@using Microsoft.AspNetCore.Identity
+@using HandmadeWeb.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+
+@foreach (var item in Model)
+{
+    @if (item.IsPage)
+    {
+        @if (@item.Area != "/Account/Login" && !SignInManager.IsSignedIn(User) )
+        {
+            <li>
+                <a class="inline-nav__link @item.Active"
+                   asp-area="@item.Area"
+                   asp-page="@item.Page">
+
+                    @item.Text
+                </a>
+            </li>
+        }
+    }
+    else
+    {
+        <li>
+            <a class="inline-nav__link @item.Active"
+               asp-controller="@item.Controller"
+               asp-action="@item.Action">
+                @item.Text
+            </a>
+        </li>
+    }
+}

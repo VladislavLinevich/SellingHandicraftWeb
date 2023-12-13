@@ -1,0 +1,15 @@
+﻿@model List<Category>
+@using Microsoft.AspNetCore.Identity
+@using HandmadeWeb.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+
+<div class="dropdown" id="dropdown">
+    @foreach (var category in Model)
+    {
+        <a asp-controller="Category" asp-action="Index" asp-route-category=@category.Id>
+            @category.Name
+        </a>
+    }
+</div>
+
+

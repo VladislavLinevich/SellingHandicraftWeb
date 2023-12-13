@@ -1,0 +1,128 @@
+.profile-review-container {
+    max-width: 1020px;
+    margin: 0px auto;
+}
+
+.profile-review-container__title {
+    font-family: 'Charter';
+    font-size: 42px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.reviews {
+    max-width: 800px;
+}
+
+.review-container {
+    margin-bottom: 30px;
+    max-width: 800px; 
+    border-radius: 10px;
+    word-wrap: break-word;
+}
+
+.review-container__star-active {
+    color: #000000;
+}
+
+.review-container__star-notactive {
+    color: #c7c7c7;
+}
+
+.review-container > p:first-child{
+    font-family: 'Arial';
+    font-weight: 400;
+    font-size: 28px;
+    padding-bottom: 10px;
+}
+
+.review-container > p:nth-child(2){
+    text-align: justify;
+    font-family: 'Arial';
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+}
+
+.review-container__product {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.review-container__product__img {
+    width: 50px;
+    height: 50px;   
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-container__product__name{
+    font-family: 'Charter';
+    margin-left: 20px;
+    word-break: break-word;
+    font-size: 20px;
+}
+
+.review-container__date{
+    font-family: 'Charter';
+    margin-left: 20px;
+    font-size: 20px;
+    min-width: 130px;
+}
+
+.review-container__line {
+    margin-top: 10px;
+    color: #d3d3d3;
+}
+
+.address-buttons{
+    margin-top: 10px;
+    display: flex;
+}
+
+.update-btn {
+    text-decoration: none;
+    font-family: 'Arial';
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-left: -10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    width: 180px;
+    border-radius: 30px;
+    cursor: pointer;
+    user-select: none;
+    color: #000000;
+}
+
+.update-btn:hover {
+    background-color: #ebe8e8;
+}
+
+.delete-btn {
+    text-decoration: none;
+    font-family: 'Arial';
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 180px;
+    border-radius: 30px;
+    cursor: pointer;
+    user-select: none;
+    color: #000000;
+}
+
+.delete-btn:hover {
+    background-color: #ebe8e8;
+}

@@ -1,0 +1,39 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using HandmadeWeb.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+@model RegisterModel
+
+@section Links {
+    <link rel="stylesheet" href="~/css/auth-page.css" />
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    Response.Redirect("/");
+}
+else
+{
+    <form class="authorization" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <h2>Регистрация</h2>
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+        <input asp-for="Input.UserName" class="authorization__input" aria-required="true" type="text" placeholder="Имя пользователя" />
+        <span asp-validation-for="Input.UserName" class="error"></span>
+        <input asp-for="Input.Email" class="authorization__input" aria-required="true" type="email" placeholder="Адрес электронной почты" />
+        <span asp-validation-for="Input.Email" class="error"></span>
+        <input asp-for="Input.DateOfBirth" class=" authorization__input" aria-required="true" type="text" onfocus="this.type='date'" onblur="this.type='text'" placeholder="Дата рождения">
+        <span asp-validation-for="Input.DateOfBirth" class="error"></span>
+        <input asp-for="Input.Password" class=" authorization__input" aria-required="true" type="password" placeholder="Пароль" />
+        <span asp-validation-for="Input.Password" class="error"></span>
+        <input asp-for="Input.ConfirmPassword" class=" authorization__input" aria-required="true" type="password" placeholder="Подтвердите пароль" />
+        <span asp-validation-for="Input.ConfirmPassword" class="error"></span>
+        <button id="registerSubmit" class="authorization__button" type="submit">Зарегистрироваться</button>
+        <h3>Уже есть аккаунт?</h3>
+        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="authorization__link">Вход</a>
+    </form>
+
+    @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }
+}
+

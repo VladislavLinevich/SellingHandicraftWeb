@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title> Handmade-web</title>
+    <link rel="stylesheet" href="~/css/header.css" />
+    @RenderSection("Links", false)
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+          rel="stylesheet" />
+</head>
+<body>
+    <header class="header">
+        <div class="navbar">
+            <a class="navbar__headline" href="">
+                <span class="navbar__movie-text">HandMade</span>
+            </a>
+            <div class="dropdown-container">
+                <button class="dropdown-btn" id="dropdown-btn">
+                    Категории
+                    <i class="bx bx-chevron-down" id="dropdown-arrow"></i>
+                </button>
+
+                @await Component.InvokeAsync("CategoryNav")
+            </div>
+            <form action="search-page.html" class="search-bar">
+                <input class="search-bar__input" type="text" name="search" placeholder="Поиск по всем категориям">
+                <button class="search-bar__button" type="submit"><img src="~/images/search.png" alt=""></button>
+            </form>
+            <nav class="inline-nav">
+                <ul>
+                    @await Component.InvokeAsync("Menu")
+                    <partial name="_LoginPartial" />
+                    @* <li>
+                        <img src="images/Dnddice.jpg" class="profile" />
+                        <ul>
+                            <li class="sub-item non-pointer">
+                                <p>Vlad Linevich</p>
+                            </li>
+                            <li class="sub-item">
+                                <span class="material-icons-outlined"> manage_accounts </span>
+                                <a href="profile-account-page.html">Изменить профиль</a>
+                            </li>
+                            <li class="sub-item">
+                                <span class="material-icons-outlined"> logout </span>
+                                <a>Выйти</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="cart" href="cart-page.html">
+                            <img class="cart__img" src="images/shopping-cart.png">
+                            <p class="cart__counter">
+                                2
+                            </p>
+                        </a>
+                    </li> *@
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <hr class="line">
+       @RenderBody()
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/dropdown-nav.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

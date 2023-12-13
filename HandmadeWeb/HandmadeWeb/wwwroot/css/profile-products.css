@@ -1,0 +1,160 @@
+.products-container {
+    max-width: 1020px;
+    margin: 0px auto;
+}
+
+.products-container__title {
+    font-family: 'Charter';
+    font-size: 42px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.add-btn {
+    text-decoration: none;
+    font-family: 'Arial';
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 220px;
+    border-radius: 30px;
+    border-width: 2px;
+    border-style: solid;
+    cursor: pointer;
+    user-select: none;
+    color: #000000;
+}
+
+.add-btn:hover {
+    box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.445)
+}
+
+.wrap-products {
+    padding-top: 20px;
+    display: flex;
+    /* justify-content: center; */
+    flex-wrap: wrap;
+    row-gap: 60px;
+    column-gap: 40px;
+}
+
+.product {
+    display: flex;
+    /* max-width: 450px; */
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px; 
+    /* border-right: 2px solid black; */
+    border-radius: 15px;
+}
+
+.product.sale {
+    background-color: #c0ffcf;
+}
+
+.product.not-sale {
+    background-color: #ffdcdc;
+}
+
+.product__price{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product__price-text{
+    margin-top: 20px;
+    font-family: 'Arial';
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.product__price-img {
+    width: 170px;
+    height: 120px;  
+    border-radius: 15px; 
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.product__info {
+    width: 260px;
+    margin-right: 20px;
+}
+
+.product__info p {
+    font-size: 16px;
+    font-family: 'Arial';
+    margin-bottom: 2px;
+}
+
+.product__info p:nth-child(2){
+    text-align: justify;
+    font-size: 15px;
+    margin-bottom: 8px;
+    max-height: 130px;
+    padding-right: 15px;
+    word-break: break-word;
+    overflow-y: scroll;
+}
+
+.product__info p:first-child{
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.product__info-buttons{
+    margin-top: 10px;
+    display: flex;
+}
+
+.update-btn {
+    text-decoration: none;
+    font-family: 'Arial';
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-left: -10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    width: 220px;
+    border-radius: 30px;
+    cursor: pointer;
+    user-select: none;
+    color: #000000;
+}
+
+.update-btn:hover {
+    background-color: #ffffff;
+    outline: 2px solid #000000;
+}
+
+.delete-btn {
+    text-decoration: none;
+    font-family: 'Arial';
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 220px;
+    border-radius: 30px;
+    cursor: pointer;
+    user-select: none;
+    color: #000000;
+}
+
+.delete-btn:hover {
+    background-color: #ffffff;
+    outline: 2px solid #000000;
+}

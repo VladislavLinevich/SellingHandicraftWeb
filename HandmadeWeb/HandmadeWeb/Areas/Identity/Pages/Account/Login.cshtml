@@ -1,0 +1,34 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using HandmadeWeb.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+@model LoginModel
+
+@section Links {
+    <link rel="stylesheet" href="~/css/auth-page.css" />
+}
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    Response.Redirect("/");
+}
+else
+{
+    <form class="authorization" id="account" method="post">
+        <h2>Войти в аккаунт</h2>
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+        <input asp-for="Input.Email" class="authorization__input" aria-required="true" type="email" placeholder="Адрес электронной почты" />
+        <span asp-validation-for="Input.Email" class="error"></span>
+        <input asp-for="Input.Password" class="authorization__input" aria-required="true" type="password" placeholder="Пароль" />
+        <span asp-validation-for="Input.Password" class="error"></span>
+        <button id="login-submit" class="authorization__button" type="submit">Войти</button>
+        <h3>Нет аккаунта?</h3>
+        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="authorization__link">Зарегистрироваться</a>
+    </form>
+
+    @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }
+}
+

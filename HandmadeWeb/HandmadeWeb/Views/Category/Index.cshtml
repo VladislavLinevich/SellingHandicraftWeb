@@ -1,0 +1,194 @@
+﻿@model CategoryProductsViewModel;
+@{
+    string rating;
+    var subCategories = ViewData["SubCategories"] as List<Category>;
+    var categoryName = ViewData["CategoryName"];
+    int counter = 0;
+
+}
+@section Links {
+    <link rel="stylesheet" href="~/css/category-page.css" />
+}
+
+<div class="main-categories">
+    <div class="main-categories__list">
+        @if(subCategories.Count != 0)
+        {
+            <h1>Покупки по категориям</h1>
+            <div class="main-categories__list__items">
+                @while (counter < subCategories.Count && counter < 6)
+                {
+                    <a class="main-categories__category" asp-asp-controller="Category" asp-action="Index" asp-route-category=@subCategories[counter].Id>
+                        <img class="main-categories__category__img" src="@Url.Content(subCategories[counter].Image)" alt="...">
+                        <p class="main-categories__category__title"> @subCategories[counter].Name</p>
+                    </a>
+                    counter++;
+                }
+            </div>
+        }
+        @if(subCategories.Count > 6)
+        {
+            <div id="additional-categories" class="main-categories__list__additional-items">
+                @while (counter < subCategories.Count)
+                {
+                    <a class="main-categories__category" asp-asp-controller="Category" asp-action="Index" asp-route-category=@subCategories[counter].Id>
+                        <img class="main-categories__category__img" src="@Url.Content(subCategories[counter].Image)" alt="...">
+                        <p class="main-categories__category__title"> @subCategories[counter].Name</p>
+                    </a>
+                    counter++;
+                }
+            </div>
+            <button id="more" class="see-more-button">Показать больше</button>
+        }
+    </div>
+</div>
+<div class="product-category-list">
+    <p class="product-category-list__name">@categoryName</p>
+    <div class="wrap-row">
+        @foreach (var product in Model.products)
+            {
+            <a class="product" href="product-detail.html">
+                <img class="product__img" src="@Url.Content(product.Image)" alt="...">
+                <div class="product__rating">
+                    <p class="product__rating-score">
+                        @{
+                            var productRating = Model.reviews.Where(r => r.ProductId == product.Id).ToList();
+                            if (productRating.Count != 0)
+                            {
+                                rating = productRating.Average(r => r.Rating).ToString("F1");
+                            }
+                            else
+                            {
+                                rating = "—";
+                            }
+                        }
+                        @rating &starf;
+                    </p>
+                </div>
+                <div class="product__price">
+                    <p class="product__price-score">@product.Price.ToString("F2") руб.</p>
+                </div>
+                <p class="product__title"> @product.Name</p>
+                <p class="product__seller"> @Model.users.FirstOrDefault(u => u.Id == product.UserId).UserName</p>
+            </a>
+        }
+        @* <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a>
+        <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a>
+        <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a>
+        <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a>
+        <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a>
+        <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a>
+        <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a>
+        <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a>
+        <a class="product" href="product-detail.html">
+            <img class="product__img" src="images/Dnddice.jpg" alt="...">
+            <div class="product__rating">
+                <p class="product__rating-score">
+                    5.0 &starf;
+                </p>
+            </div>
+            <div class="product__price">
+                <p class="product__price-score">25,00 руб.</p>
+            </div>
+            <p class="product__title"> Кости DnD ручной работы</p>
+            <p class="product__seller"> Nathan</p>
+        </a> *@
+    </div>
+</div>
+<script src="js/see-more.js"></script>
