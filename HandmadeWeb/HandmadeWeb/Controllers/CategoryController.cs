@@ -50,5 +50,18 @@ namespace HandmadeWeb.Controllers
             viewModel.reviews = dbContext.Review.ToList();
             return View(viewModel);
         }
+
+        public IActionResult Search(string search)
+        {
+            var sub_categories = dbContext.Category.Where(c => c.ParentId == null).ToList();
+            ViewData["SubCategories"] = sub_categories;
+            ViewData["SearchQuery"] = search;
+
+            var searchResult = dbContext.Product.Where(p => p.Name.ToLower().Replace(" ", "").Contains(search.ToLower().Replace(" ", ""))).ToList();
+            viewModel.products = searchResult;
+            viewModel.users = dbContext.Users.ToList();
+            viewModel.reviews = dbContext.Review.ToList();
+            return View("Search", viewModel);
+        }
     }
 }

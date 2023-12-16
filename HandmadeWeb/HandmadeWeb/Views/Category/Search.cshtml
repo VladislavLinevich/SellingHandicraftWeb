@@ -2,7 +2,7 @@
 @{
     string rating;
     var subCategories = ViewData["SubCategories"] as List<Category>;
-    var categoryName = ViewData["CategoryName"];
+    var search = ViewData["SearchQuery"];
     int counter = 0;
 
 }
@@ -43,7 +43,7 @@
     </div>
 </div>
 <div class="product-category-list">
-    <p class="product-category-list__name">@categoryName</p>
+    <p class="product-category-list__name">Резльтат поиска: @search</p>
     <div class="wrap-row">
         @foreach (var product in Model.products)
             {

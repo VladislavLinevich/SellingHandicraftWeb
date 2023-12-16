@@ -139,9 +139,13 @@
     transition: 0.4s;
     color: rgb(0, 0, 0);
 }
+    .quantity-button:not([disabled]):hover {
+        background: rgb(228, 224, 224);
+    }
 
-.quantity-button:hover {
-    background: rgb(228, 224, 224);
+.quantity-button:disabled {
+    opacity: 0.3;
+    cursor: default;
 }
 
 .delete-block{
@@ -196,4 +200,12 @@
 .checkout-button:hover {
     background: rgba(39, 38, 38, 0.863);
     scale: 1.05;
+}
+
+.total-price-text {
+    font-family: 'Arial';
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 26px;
 }

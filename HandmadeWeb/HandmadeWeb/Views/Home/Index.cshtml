@@ -3,7 +3,7 @@
 @{
     string rating;
     var mainCategories = ViewData["MainCategories"] as List<Category>;
-    var products = ViewData["Products"] as Dictionary<string, List<Product>>;
+    //var products = ViewData["Products"] as Dictionary<string, List<Product>>;
 }
 
 @section Links {
@@ -32,7 +32,7 @@
         <div class="wrap-row">
             @foreach (var product in categoryProduct.Value)
             {
-                <a class="product" href="product-detail.html">
+                <a class="product" asp-controller="Product" asp-action="Index" asp-route-productId=@product.Id>
                     <img class="product__img" src="@Url.Content(product.Image)" alt="...">
                     <div class="product__rating">
                         <p class="product__rating-score">

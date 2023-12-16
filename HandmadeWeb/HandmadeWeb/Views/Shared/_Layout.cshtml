@@ -18,7 +18,7 @@
 <body>
     <header class="header">
         <div class="navbar">
-            <a class="navbar__headline" href="">
+            <a class="navbar__headline" asp-controller="Home" asp-action="Index">
                 <span class="navbar__movie-text">HandMade</span>
             </a>
             <div class="dropdown-container">
@@ -29,9 +29,9 @@
 
                 @await Component.InvokeAsync("CategoryNav")
             </div>
-            <form action="search-page.html" class="search-bar">
-                <input class="search-bar__input" type="text" name="search" placeholder="Поиск по всем категориям">
-                <button class="search-bar__button" type="submit"><img src="~/images/search.png" alt=""></button>
+            <form class="search-bar" asp-controller="Category" asp-action="Search" method="get">
+                <input class="search-bar__input" type="text" maxlength="64" name="search" placeholder="Поиск по всем категориям">
+                <button class="search-bar__button"><img src="~/images/search.png" alt=""></button>
             </form>
             <nav class="inline-nav">
                 <ul>

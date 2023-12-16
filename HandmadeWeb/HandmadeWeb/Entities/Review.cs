@@ -17,8 +17,9 @@ namespace HandmadeWeb.Entities
         [Required]
         public int Rating { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите текст отзыва")]
         [MaxLength(512)]
+        [StringLength(512, ErrorMessage = "Длина отзыва минимум {2} символа", MinimumLength = 32)]
         public string Text { get; set; }
 
         [Required]

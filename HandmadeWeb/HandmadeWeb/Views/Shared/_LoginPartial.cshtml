@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using HandmadeWeb.Entities
+﻿@using HandmadeWeb.Entities
 @using System.IO
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -27,14 +26,7 @@
             </li>
         </ul>
     </li>
-    <li>
-        <a class="cart" href="cart-page.html">
-            <img class="cart__img" src="~/images/shopping-cart.png">
-            <p class="cart__counter">
-                2
-            </p>
-        </a>
-    </li>
+    @await Component.InvokeAsync("Cart")
 }
 @* else
 {

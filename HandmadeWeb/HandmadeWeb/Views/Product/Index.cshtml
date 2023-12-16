@@ -1,0 +1,154 @@
+﻿@inject UserManager<ApplicationUser> UserManager
+@model ProductViewModel;
+@{
+    string rating;
+    int ratingCount = 0;
+    if (Model.reviews.Count != 0)
+    {
+        rating = Model.reviews.Average(r => r.Rating).ToString("F2");
+        ratingCount = (int)Math.Round(Model.reviews.Average(r => r.Rating));
+    }
+    else
+    {
+        rating = "—";
+    }
+
+    var user = await UserManager.GetUserAsync(User);
+}
+@section Links {
+    <link rel="stylesheet" href="~/css/product-page.css" />
+}
+<div class="detail-container">
+    <div>
+        <img class="detail-container__product-img" src="@Url.Content(Model.product.Image)">
+        <div class="send-review-container">
+            <p>Оставить отзыв</p>
+            @if (user != null && Model.reviews.Any(r => r.UserId == user.Id && r.ProductId == Model.product.Id))
+            {
+                             
+                <form class="send-review-form" asp-controller="Product" asp-action="ChangeReview" asp-route-productId=@Model.product.Id>
+                    <div class="send-review-form__rating">
+                        <p>Оценка</p>
+                        <div class="rate">
+                            @for(int i = 5; i > 0; i--)
+                            {   
+                                if (i == Model.review.Rating)
+                                {
+                                    <input type="radio" id="star@(i)" asp-for="@Model.review.Rating" value="@i" checked />
+                                    <label for="star@(i)" title="@i">&starf;</label>
+                                } else
+                                {
+                                    <input type="radio" id="star@(i)" asp-for="@Model.review.Rating" value="@i" />
+                                    <label for="star@(i)" title="@i">&starf;</label>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <textarea  asp-for="@Model.review.Text" class="send-review-form__textarea-comment" placeholder="Текст"></textarea>
+                    <span asp-validation-for="@Model.review.Text" class="error_small"></span>
+                    <div asp-validation-summary="ModelOnly" class="error_small"></div>
+                    <button value="ChangeReview" class="send-review-form__send-button" type="submit">Изменить</button>
+                </form>
+            } else
+            {
+                <form class="send-review-form" asp-controller="Product" asp-action="SendReview" asp-route-productId=@Model.product.Id>
+                    <div class="send-review-form__rating">
+                        <p>Оценка</p>
+                        <div class="rate">
+                            <input type="radio" id="star5" asp-for="@Model.review.Rating" value="5" />
+                            <label for="star5" title="5">&starf;</label>
+                            <input type="radio" id="star4" asp-for="@Model.review.Rating" value="4" />
+                            <label for="star4" title="4">&starf;</label>
+                            <input type="radio" id="star3" asp-for="@Model.review.Rating" value="3" />
+                            <label for="star3" title="3">&starf;</label>
+                            <input type="radio" id="star2" asp-for="@Model.review.Rating" value="2" />
+                            <label for="star2" title="2">&starf;</label>
+                            <input type="radio" id="star1" asp-for="@Model.review.Rating" value="1" checked />
+                            <label for="star1" title="1">&starf;</label>
+                        </div>
+                    </div>
+                    <textarea asp-for="@Model.review.Text" class="send-review-form__textarea-comment" placeholder="Текст"></textarea>
+                    <span asp-validation-for="@Model.review.Text" class="error_small"></span>
+                    <div asp-validation-summary="ModelOnly" class="error_small"></div>
+                    <button value="SendReview" class="send-review-form__send-button" type="submit">Отправить</button>
+                </form>
+            }
+        </div>
+
+        <div class="reviews">
+            <p>Отзывы</p>
+            @foreach(var review in Model.reviews)
+            {
+                <div class="review-container">
+                    <p>
+                        @for (int i = 0; i < review.Rating; i++)
+                        {
+                            <span class="review-container__star-active"> &starf;</span>
+                        }
+                        @for (int i = review.Rating; i < 5; i++)
+                        {
+                            <span class="review-container__star-notactive"> &starf;</span>
+                        }
+                    </p>
+                    <p>@review.Text</p>
+                    <div class="review-container__author">
+                        <img class="review-container__author__img" src="@Url.Content(Model.users.FirstOrDefault(u => u.Id == review.UserId).Avatar)">
+                        <p class="review-container__author__name"> @Model.users.FirstOrDefault(u => u.Id == review.UserId).UserName</p>
+                        <p class="review-container__author__date"> @review.ReviewDate.ToString("dd MMM yyyy 'г.'", new System.Globalization.CultureInfo("ru-RU"))</p>
+                    </div>
+                    <hr class="review-container__line">
+                </div>
+            }
+        </div>
+    </div>
+    <div class="detail-container__product-info">
+        <p class="detail-container__product-name">@Model.product.Name</p>
+        <p class="detail-container__product-rating">
+            Оценка:
+            @for(int i = 0; i < ratingCount; i++)
+            {
+                <span class="detail-container__star-active"> &starf;</span>
+            }
+            @for (int i = ratingCount; i < 5; i++)
+            {
+                <span class="detail-container__star-notactive"> &starf;</span>
+            } (@rating)
+        </p>
+        <p class="detail-container__product-price"> Цена: @Model.product.Price.ToString("F2") руб. </p>
+        <details class="product-detail">
+            <summary>Количество</summary>
+            <p class="text-info">
+                На данный момент у продавца в наличии @Model.product.Quantity шт. товара.
+            </p>
+        </details>
+        <details class="product-detail">
+            <summary>Описание продукта</summary>
+            <p class="text-info">
+                @Model.product.Description
+            </p>
+        </details>
+        <details class="product-detail">
+            <summary>Продавец</summary>
+            <div class="seller-info">
+                <img class="seller-info__img" src="@Url.Content(Model.users.FirstOrDefault(u => u.Id == Model.product.UserId).Avatar)">
+                <p class="seller-info__name"> @Model.users.FirstOrDefault(u => u.Id == Model.product.UserId).UserName</p>
+            </div>
+        </details>
+        <form class="add-to-cart-form" asp-controller="Product" asp-action="AddToCart">
+            <input type="hidden" name="productId" value=@Model.product.Id>
+            <button class="add-to-cart-form__add-button" type="submit">
+                Добавить в корзину
+            </button>
+            <div asp-validation-summary="ModelOnly" class="error_small"></div>
+        </form>
+        @if (TempData["CartError"] != null)
+        {
+            <div class="error_small">@TempData["CartError"].ToString()</div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

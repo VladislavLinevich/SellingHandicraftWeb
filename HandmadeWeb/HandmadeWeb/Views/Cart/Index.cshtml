@@ -1,0 +1,80 @@
+﻿@model CartViewModel
+@{
+    int? cartCount = ViewData["CartCount"] as int?;
+    decimal totalPrice;
+}
+@section Links {
+    <link rel="stylesheet" href="~/css/cart-page.css" />
+}
+<div class="cart-container">
+    <p class="cart-count">
+        В корзине @cartCount товара
+    </p>
+    <div>
+        @foreach (var sellerProducts in Model.cartItems)
+        {
+            totalPrice = 0;
+            <div class="cart-section">
+                <div class="cart-items-row">
+                    <div class="cart-items__author">
+                        <img class="cart-items__author__img" src="@Url.Content(sellerProducts.Key.Avatar)">
+                        <p class="cart-items__author__name"> @sellerProducts.Key.UserName</p>
+                    </div>
+                    @foreach (var item in sellerProducts.Value)
+                    {
+                        var product = Model.products.Find(p => p.Id == item.ProductId);
+                        
+                        <div class="cart-item">
+                            <img class="cart-item__img" src="@Url.Content(product.Image)" alt="...">
+                            <div class="cart-item__info">
+                                <p class="cart-item__info__name">@product.Name</p>
+                                <p class="cart-item__info__small-description">@product.Description</p>
+                                <div class="cart-form">
+                                    <form asp-controller ="Cart" asp-action="Add" asp-route-itemId=@item.ProductId>
+                                        @if(item.Quantity >= product.Quantity){
+                                            <button class="quantity-button" type="submit" disabled> + </button>
+                                        } else
+                                        {
+                                            <button class="quantity-button" type="submit"> + </button>
+                                        }
+                                    </form>
+
+                                    <p class="quantity"> @item.Quantity </p>
+                                    <form asp-controller="Cart" asp-action="Reduce" asp-route-itemId=@item.ProductId>
+                                        @if (item.Quantity == 1)
+                                        {
+                                            <button class="quantity-button" type="submit" disabled> - </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="quantity-button" type="submit"> - </button>
+                                        }
+                                    </form>
+                                    <form class="delete-block" asp-controller="Cart" asp-action="Delete" asp-route-itemId=@item.ProductId>
+                                        <button class="delete-button" type="submit">
+                                            Удалить
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="cart-item__price">
+                                @{
+                                    var itemPrice = product.Price * item.Quantity;
+                                    totalPrice += itemPrice;
+                                }
+                                <p class="cart-item__price-text">@itemPrice.ToString("F2") р.</p>
+                            </div>
+                        </div>
+                    }
+                    
+                </div>
+                <form class="buy-products" asp-route-sellerId="@sellerProducts.Key.Id">
+                    <p class="total-price-text">Сумма: @totalPrice.ToString("F2") р.</p>
+                    <button class="checkout-button">Оформить заказ</button>
+                </form>
+            </div>
+            <hr class="cart-line">
+        }
+
+    </div>
+</div>

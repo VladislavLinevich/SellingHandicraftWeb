@@ -92,16 +92,17 @@
     font-weight: 400;
     font-size: 20px;
     color: #ff0000;
-}
+}*/
 
 .error_small {
+    margin-top: 10px;
     text-align: center;
     width: 100%;
     font-family: 'Arial';
     font-weight: 400;
     font-size: 20px;
     color: #ff0000;
-} */
+} 
 
 .error {
     margin-bottom: 30px;
@@ -113,6 +114,10 @@
 }
 
 .error ul {
+    list-style-type: none;
+}
+
+.error_small ul {
     list-style-type: none;
 }
 

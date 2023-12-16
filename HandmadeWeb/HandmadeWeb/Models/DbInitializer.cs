@@ -26,29 +26,29 @@ namespace HandmadeWeb.Models
             List<Product> products = new List<Product>
             {
                 new Product {Name = "Dnd Dice", Description="Набор негабаритных кубиков с цифрами, написанными чернилами по вашему выбору. Бросьте в кастрюлю под давлением, чтобы убедиться, что кости свободны от пузырьков.",
-                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
                 new Product {Name = "Dnd Dice", Description="Набор негабаритных кубиков с цифрами, написанными чернилами по вашему выбору. Бросьте в кастрюлю под давлением, чтобы убедиться, что кости свободны от пузырьков.",
-                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
                 new Product {Name = "Dnd Dice", Description="Набор негабаритных кубиков с цифрами, написанными чернилами по вашему выбору. Бросьте в кастрюлю под давлением, чтобы убедиться, что кости свободны от пузырьков.",
-                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
                 new Product {Name = "Dnd Dice", Description="Набор негабаритных кубиков с цифрами, написанными чернилами по вашему выбору. Бросьте в кастрюлю под давлением, чтобы убедиться, что кости свободны от пузырьков.",
-                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
                 new Product {Name = "Dnd Dice", Description="Набор негабаритных кубиков с цифрами, написанными чернилами по вашему выбору. Бросьте в кастрюлю под давлением, чтобы убедиться, что кости свободны от пузырьков.",
-                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
                 new Product {Name = "Dnd Dice", Description="Набор негабаритных кубиков с цифрами, написанными чернилами по вашему выбору. Бросьте в кастрюлю под давлением, чтобы убедиться, что кости свободны от пузырьков.",
-                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
                 new Product {Name = "Dnd Dice", Description="Набор негабаритных кубиков с цифрами, написанными чернилами по вашему выбору. Бросьте в кастрюлю под давлением, чтобы убедиться, что кости свободны от пузырьков.",
-                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
                 new Product {Name = "Dnd Dice", Description="Набор негабаритных кубиков с цифрами, написанными чернилами по вашему выбору. Бросьте в кастрюлю под давлением, чтобы убедиться, что кости свободны от пузырьков.",
-                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 25.00M, Image = "~/images/Dnddice.jpg", Quantity=15, CategoryId=5, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
                 new Product {Name = "Игрушечная лошадь", Description="Игрушечная лошадь для игрыю Очень качественные материалы и качественные краски.",
-                             Price = 15.50M, Image = "~/images/Toys.jpg", Quantity=25, CategoryId=6, UserId="d797573b-73c0-4256-961b-9fd951ea1d4d" },
+                             Price = 15.50M, Image = "~/images/Toys.jpg", Quantity=25, CategoryId=6, UserId="3194e9cb-0b70-4553-8d8f-3c08f4049c94" },
             };
 
             List<Review> reviews = new List<Review>
             {
-                new Review { Rating = 4, Text="good dice", ReviewDate=DateTime.Now, ProductId=2, UserId="9668f43c-7c99-485b-849e-ba69a66e049f"},
-                new Review { Rating = 5, Text="good dice", ReviewDate=DateTime.Now, ProductId=2, UserId="f6efc5ec-3a96-42af-a404-f076733a54ff"},
+                new Review { Rating = 4, Text="good dice", ReviewDate=DateTime.Now, ProductId=2, UserId="1f057154-7072-4fdc-83d1-15fea130d2af"},
+                new Review { Rating = 5, Text="good dice", ReviewDate=DateTime.Now, ProductId=2, UserId="5a3094d3-d5a9-41b0-be1f-cab4a762864d"},
             };
 
             string sellerName = "VadimLinevich";

@@ -32,7 +32,6 @@ namespace HandmadeWeb.Data
                                              .Ignore(c => c.PhoneNumber)
                                              .Ignore(c => c.PhoneNumberConfirmed)
                                              .Ignore(c => c.ConcurrencyStamp)
-                                             .Ignore(c => c.SecurityStamp)
                                              .Ignore(c => c.EmailConfirmed);
 
             builder.Entity<ApplicationUser>().Property(x => x.UserName).HasMaxLength(32);
