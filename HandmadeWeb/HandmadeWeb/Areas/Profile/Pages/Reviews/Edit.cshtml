@@ -1,0 +1,40 @@
+﻿@page
+@model HandmadeWeb.Areas.Profile.Pages.Reviews.EditModel
+
+@section Links {
+    <link rel="stylesheet" href="~/css/profile-form.css" />
+}
+
+<div class="profile-form">
+    <h2>Изменить отзыв</h2>
+
+    <form class="send-review-form" method="post">
+        <input type="hidden" asp-for="Review.ProductId" />
+        <div class="send-review-form__rating">
+            <p>Оценка</p>
+            <div class="rate">
+                @for (int i = 5; i > 0; i--)
+                {
+                    if (i == Model.Review.Rating)
+                    {
+                        <input type="radio" id="star@(i)" asp-for="@Model.Review.Rating" value="@i" checked />
+                        <label for="star@(i)" title="@i">&starf;</label>
+                    }
+                    else
+                    {
+                        <input type="radio" id="star@(i)" asp-for="@Model.Review.Rating" value="@i" />
+                        <label for="star@(i)" title="@i">&starf;</label>
+                    }
+                }
+            </div>
+        </div>
+        <textarea asp-for="@Model.Review.Text" class="send-review-form__textarea-comment" placeholder="Текст"></textarea>
+        <span asp-validation-for="@Model.Review.Text" class="error_small"></span>
+        <div asp-validation-summary="ModelOnly" class="error_small"></div>
+        <button value="ChangeReview" class="send-review-form__send-button" type="submit">Изменить</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

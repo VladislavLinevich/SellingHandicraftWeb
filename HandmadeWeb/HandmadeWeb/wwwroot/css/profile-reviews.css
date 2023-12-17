@@ -57,12 +57,20 @@
     object-fit: cover;
 }
 
-.review-container__product__name{
+.review-container__product__name {
     font-family: 'Charter';
     margin-left: 20px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
     word-break: break-word;
     font-size: 20px;
 }
+
+    .review-container__product__name:hover {
+        border-bottom: 3px solid #000000;
+        margin-bottom: -3px;
+    }
 
 .review-container__date{
     font-family: 'Charter';
@@ -117,6 +125,8 @@
     padding-right: 10px;
     padding-left: 10px;
     width: 180px;
+    background-color: white;
+    border: none;
     border-radius: 30px;
     cursor: pointer;
     user-select: none;

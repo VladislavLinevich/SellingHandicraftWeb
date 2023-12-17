@@ -74,7 +74,7 @@ namespace HandmadeWeb.Areas.Identity.Pages.Account
             /// 
 
             [Required(ErrorMessage = "Введите имя пользователя")]
-            [StringLength(32, ErrorMessage = "Максимальная длина электронной почты равна {1} символам.")]
+            [StringLength(32, ErrorMessage = "Максимальная длина имени пользователя равна {1} символам.")]
             [Display(Name = "UserName")]
             public string UserName { get; set; }
 

@@ -45,12 +45,15 @@
     border-right: 2px solid black;
 }
 
-.address p {
-    font-size: 15px;
-    font-family: 'Arial';
-    color: #797979;
-    margin-bottom: 2px;
-}
+    .address p {
+        font-size: 15px;
+        font-family: 'Arial';
+        color: #797979;
+        margin-bottom: 2px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 
 .address p:first-child{
     font-weight: bold;
@@ -98,6 +101,8 @@
     padding-right: 10px;
     padding-left: 10px;
     width: 220px;
+    background-color: white;
+    border: none;
     border-radius: 30px;
     cursor: pointer;
     user-select: none;

@@ -38,7 +38,7 @@ namespace HandmadeWeb.Entities
         public decimal TotalCost { get; set; }
 
         public string CustomerId { get; set; }
-        public ApplicationUser User { get; set; }
+        public ApplicationUser Customer { get; set; }
 
         public List<OrderItem> OrderItems { get; set; }
     }

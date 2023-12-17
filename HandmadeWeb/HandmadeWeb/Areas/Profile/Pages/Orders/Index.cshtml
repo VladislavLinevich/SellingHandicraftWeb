@@ -1,0 +1,49 @@
+﻿@page
+@model HandmadeWeb.Areas.Profile.Pages.Orders.IndexModel
+
+@section Links {
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/profile-orders.css" />
+}
+
+<div class="profile-nav">
+    <ul>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Account/Index">Аккаунт</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Address/Index">Адреса</a></li>
+        <li><a class="profile-nav__link active" asp-area="Profile" asp-page="/Orders/Index">Заказы</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Sales/Index">Продажи</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Reviews/Index">Отзывы</a></li>
+    </ul>
+</div>
+<div class="orders-container">
+    <p class="orders-container__title"> Ваши заказы</p>
+    <div class="wrap-orders">
+        @foreach (var order in Model.Orders)
+        {
+            <div class="order">
+                <div class="order-items">
+                    @foreach (var orderItem in order.Value)
+                    {
+                        var product = Model.Products.Find(p => p.Id == orderItem.ProductId);
+
+                        <div class="order-items__product">
+                            <img class="order-items__product__img" src="@Url.Content(product.Image)">
+                            <a class="order-items__product__name" asp-action="Index" asp-controller="Product" asp-route-productId=@product.Id> @product.Name, @orderItem.Quantity шт.</a>
+                        </div>
+                    }
+                </div>
+                <div class="order__address">
+                    <p>@order.Key.Fullname</p>
+                    <p>@order.Key.Street</p>
+                    <p>@order.Key.City</p>
+                    <p>@order.Key.Postcode</p>
+                    <p>@order.Key.Phone</p>
+                </div>
+                <div class="order__price">
+                    <p class="order__price-text">@order.Key.TotalCost.ToString("F2") р.</p>
+                </div>
+            </div>            
+        }
+    </div>
+</div>
+

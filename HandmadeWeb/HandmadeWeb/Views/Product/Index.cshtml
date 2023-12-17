@@ -134,16 +134,26 @@
                 <p class="seller-info__name"> @Model.users.FirstOrDefault(u => u.Id == Model.product.UserId).UserName</p>
             </div>
         </details>
-        <form class="add-to-cart-form" asp-controller="Product" asp-action="AddToCart">
-            <input type="hidden" name="productId" value=@Model.product.Id>
-            <button class="add-to-cart-form__add-button" type="submit">
-                Добавить в корзину
-            </button>
-            <div asp-validation-summary="ModelOnly" class="error_small"></div>
-        </form>
-        @if (TempData["CartError"] != null)
+        @if (user != null && user.Id == Model.product.UserId)
         {
-            <div class="error_small">@TempData["CartError"].ToString()</div>
+            
+        } else
+        {   
+            @if (!Model.product.IsDeleted)
+            {
+                <form class="add-to-cart-form" asp-controller="Product" asp-action="AddToCart">
+                    <input type="hidden" name="productId" value=@Model.product.Id>
+                    <button class="add-to-cart-form__add-button" type="submit">
+                        Добавить в корзину
+                    </button>
+                    <div asp-validation-summary="ModelOnly" class="error_small"></div>
+                </form>
+                @if (TempData["CartError"] != null)
+                {
+                    <div class="error_small">@TempData["CartError"].ToString()</div>
+                }
+                
+            }            
         }
     </div>
 </div>

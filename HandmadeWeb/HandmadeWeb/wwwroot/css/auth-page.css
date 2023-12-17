@@ -21,6 +21,14 @@
     margin-bottom: 15px;  
 }
 
+.authorization__label {
+    font-family: 'Arial';
+    font-weight: bold;
+    margin-bottom: 15px;
+    align-self: center;
+    font-size: 36px;
+}
+
 .authorization__input{
     font-family: 'Arial';
     font-weight: bold;

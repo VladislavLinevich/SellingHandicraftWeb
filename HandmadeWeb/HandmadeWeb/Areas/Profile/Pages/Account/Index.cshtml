@@ -1,0 +1,48 @@
+﻿@page
+@model HandmadeWeb.Areas.Profile.Pages.Account.IndexModel
+@section Links {
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/profile-account.css" />
+}
+<div class="profile-nav">
+    <ul>
+        <li><a class="profile-nav__link active" asp-area="Profile" asp-page="/Account/Index">Аккаунт</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Address/Index">Адреса</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Orders/Index">Заказы</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Sales/Index">Продажи</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Reviews/Index">Отзывы</a></li>
+    </ul>
+</div>
+
+<div class="profile-container">
+    <p class="profile-container__title"> Данные профиля</p>
+    @if(Model.Role != "Продавец")
+    {
+        <form method="post">
+            <button class="start-btn" type="submit"> Начать продавать</button>
+        </form>
+    }
+    <div class="profile-info">
+        <div class="profile-info__data">
+            <p class="info-name">Изображение профиля</p>
+            <img src="@Url.Content(Model.User.Avatar)" class="profile-image" />
+        </div>
+        <div class="profile-info__data">
+            <p class="info-name">Имя пользователя</p>
+            <p>@Model.User.UserName</p>
+        </div>
+        <div class="profile-info__data">
+            <p class="info-name">Электронная почта</p>
+            <p>@Model.User.Email</p>
+        </div>
+        <div class="profile-info__data">
+            <p class="info-name">Дата рождения</p>
+            <p>@Model.User.Date_of_birth.ToString("dd MMM yyyy 'г.'", new System.Globalization.CultureInfo("ru-RU"))</p>
+        </div>
+        <div class="profile-info__data">
+            <p class="info-name">Роль</p>
+            <p>@Model.Role</p>
+        </div>
+    </div>
+    <a class="edit-btn" asp-page="./Edit"> Редактировать</a>
+</div>

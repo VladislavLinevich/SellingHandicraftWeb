@@ -16,6 +16,26 @@ namespace HandmadeWeb.Models
         {
             _db = db;
         }
+        public List<Category> GetBottomSubcategories(int categoryId)
+        {
+            var subCategories = _db.Category.Where(c => c.ParentId == categoryId).ToList();
+            var bottomCategories = new List<Category>();
+
+            foreach (var category in subCategories)
+            {
+                var children = GetBottomSubcategories(category.Id);
+                if (children.Count == 0)
+                {
+                    bottomCategories.Add(category);
+                }
+                else
+                {
+                    bottomCategories.AddRange(children);
+                }
+            }
+
+            return bottomCategories;
+        }
 
         public List<Category> GetSubcategories(int categoryId)
         {
@@ -35,17 +55,41 @@ namespace HandmadeWeb.Models
         public List<Product> GetProductsByCategory(Category category)
         {
             var sub_categories = GetSubcategories(category.Id);
-            sub_categories.Add(category);
+            if (sub_categories.Count == 0)
+            {
+                sub_categories.Add(category);
+            }
 
-            return _db.Product.AsEnumerable().Where(p => sub_categories.Any(c => c.Id == p.CategoryId)).ToList();
+            return _db.Product.AsEnumerable().Where(p => sub_categories.Any(c => c.Id == p.CategoryId) && p.IsDeleted == false).ToList();
         }
 
         public List<Product> GetProductsByCategory(Category category, int count)
         {
             var sub_categories = GetSubcategories(category.Id);
-            sub_categories.Add(category);
+            if (sub_categories.Count == 0)
+            {
+                sub_categories.Add(category);
+            }
 
-            return _db.Product.AsEnumerable().Where(p => sub_categories.Any(c => c.Id == p.CategoryId)).Take(count).ToList();
+            return _db.Product.AsEnumerable().Where(p => sub_categories.Any(c => c.Id == p.CategoryId) && p.IsDeleted == false).Take(count).ToList();
+        }
+
+        public List<Category> GetAllSubCategories()
+        {
+            var categories = _db.Category.Where(c => c.ParentId == null).ToList();
+            List<Category> result = new List<Category>();
+
+            foreach (var category in categories)
+            {
+                var sub_categories = GetBottomSubcategories(category.Id);
+                if (sub_categories.Count == 0)
+                {
+                    sub_categories.Add(category);
+                }
+                result.AddRange(sub_categories);
+            }
+
+            return result;
         }
 
         public async Task<(bool, string)> AddToCart(Product product, Cart cart)

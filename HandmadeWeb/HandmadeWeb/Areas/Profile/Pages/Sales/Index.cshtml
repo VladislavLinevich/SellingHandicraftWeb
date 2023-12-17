@@ -1,0 +1,68 @@
+﻿@page
+@model HandmadeWeb.Areas.Profile.Pages.Sales.IndexModel
+
+@section Links {
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/profile-products.css" />
+}
+
+<div class="profile-nav">
+    <ul>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Account/Index">Аккаунт</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Address/Index">Адреса</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Orders/Index">Заказы</a></li>
+        <li><a class="profile-nav__link active" asp-area="Profile" asp-page="/Sales/Index">Продажи</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Reviews/Index">Отзывы</a></li>
+    </ul>
+</div>
+<div class="products-container">
+    <p class="products-container__title"> Продукты выставленные на продажу</p>
+    <a class="add-btn" asp-page="./Create"> Выставить на продажу</a>
+    @if(TempData["RoleError"] != null)
+    {
+        <p  class="error">@TempData["RoleError"]</p>
+    }
+    <div class="wrap-products">
+        @foreach (var item in Model.Products)
+        {
+            @if (item.IsDeleted)
+            {
+                <div class="product not-sale">
+                    <div class="product__price">
+                        <img class="product__price-img" src="@Url.Content(item.Image)">
+                        <p class="product__price-text">@item.Price.ToString("F2") р.</p>
+                    </div>
+                    <div class="product__info">
+                        <p>@item.Name</p>
+                        <p>@item.Description</p>
+                        <p>Количество: @item.Quantity шт.</p>
+                        <p>Продано за все время: @item.NumberOfSales шт.</p>                    
+                        <p>На продаже: нет</p>                        
+                        <div class="product__info-buttons">
+                            <a class="update-btn" asp-page="./Edit" asp-route-id=@item.Id>Редактировать</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="product sale">
+                    <div class="product__price">
+                        <img class="product__price-img" src="@Url.Content(item.Image)">
+                        <p class="product__price-text">@item.Price.ToString("F2") р.</p>
+                    </div>
+                    <div class="product__info">
+                        <p>@item.Name</p>
+                        <p>@item.Description</p>
+                        <p>Количество: @item.Quantity шт.</p>
+                        <p>Продано за все время: @item.NumberOfSales шт.</p>
+                        <p>На продаже: да</p>
+                        <div class="product__info-buttons">
+                            <a class="update-btn" asp-page="./Edit" asp-route-id=@item.Id>Редактировать</a>
+                        </div>
+                    </div>
+                </div>                
+            }
+        }
+    </div>
+</div>

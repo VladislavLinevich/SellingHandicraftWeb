@@ -9,23 +9,25 @@ namespace HandmadeWeb.Entities
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите название продукта")]
         [MaxLength(128)]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите описание продукта")]
         [MaxLength(512)]
+        [StringLength(512, ErrorMessage = "Описание должно быть не менее {2} символов", MinimumLength = 32)]
         public string Description { get; set; }
 
-        [Required]
-        [Precision(6, 2)]
+        [Required(ErrorMessage = "Введите сумму для открытия счета")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Введите корректную сумму (Максимум 2 знака после запятой, например 200,45)")]
+        [Range(1, 100000.00, ErrorMessage = "Максимальная сумма от 1 до 100000.00")]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Укажите изображение")]
         [MaxLength(512)]
         public string Image { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите количество товара")]
         public int Quantity { get; set; }
 
         [Required]

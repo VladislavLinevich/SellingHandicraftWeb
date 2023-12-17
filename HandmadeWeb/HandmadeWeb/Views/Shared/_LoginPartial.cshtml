@@ -6,20 +6,20 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    ApplicationUser user = await UserManager.FindByNameAsync(User.Identity.Name);
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+    { }
     <li>
         <img src="@Url.Content(user.Avatar)" class="profile" />
         <ul>
             <li class="sub-item non-pointer">
-                <p>@User.Identity.Name</p>
+                <p>@user.UserName</p>
             </li>
             <li class="sub-item">
                 <span class="material-icons-outlined"> manage_accounts </span>
-                <a href="profile-account-page.html">Изменить профиль</a>
+                <a asp-area="Profile" asp-page="/Account/Index">Изменить профиль</a>
             </li>
             <li class="sub-item">
                 <span class="material-icons-outlined"> logout </span>
-                @* <a>Выйти</a> *@
                 <form class="log-out" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@ViewContext.HttpContext.Request.Path" method="post">
                     <button type="submit" class="log-off">Выйти</button>
                 </form>
@@ -28,13 +28,3 @@
     </li>
     @await Component.InvokeAsync("Cart")
 }
-@* else
-{
-    <li>
-        <a class="inline-nav__link"
-           asp-area="Identity"
-           asp-page="/Account/Login">
-            Войти
-        </a>
-    </li>
-} *@

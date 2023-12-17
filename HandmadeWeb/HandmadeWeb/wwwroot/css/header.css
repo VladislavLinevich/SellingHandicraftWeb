@@ -385,7 +385,7 @@ body {
   
   .profile {
     height: 50px;
-    width: auto;
+    width: 50px;
     cursor: pointer;
     border: 2px solid;
     border-color: black;

@@ -57,7 +57,7 @@ namespace HandmadeWeb.Controllers
             ViewData["SubCategories"] = sub_categories;
             ViewData["SearchQuery"] = search;
 
-            var searchResult = dbContext.Product.Where(p => p.Name.ToLower().Replace(" ", "").Contains(search.ToLower().Replace(" ", ""))).ToList();
+            var searchResult = dbContext.Product.Where(p => p.Name.ToLower().Replace(" ", "").Contains(search.ToLower().Replace(" ", "")) && p.IsDeleted == false).ToList();
             viewModel.products = searchResult;
             viewModel.users = dbContext.Users.ToList();
             viewModel.reviews = dbContext.Review.ToList();

@@ -1,0 +1,37 @@
+﻿@page
+@model HandmadeWeb.Areas.Profile.Pages.Address.IndexModel
+
+@section Links {
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/profile-adress.css" />
+}
+
+<div class="profile-nav">
+    <ul>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Account/Index">Аккаунт</a></li>
+        <li><a class="profile-nav__link active" asp-area="Profile" asp-page="/Address/Index">Адреса</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Orders/Index">Заказы</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Sales/Index">Продажи</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Reviews/Index">Отзывы</a></li>
+    </ul>
+</div>
+<div class="address-container">
+    <p class="address-container__title"> Ваши адреса доставки</p>
+    <a class="add-btn" asp-page="Create"> Добавить новый адрес</a>
+    <div class="wrap-address">
+        @foreach (var item in Model.Address)
+        {
+            <div class="address">
+                <p>@item.Fullname</p>
+                <p>@item.Street</p>
+                <p>@item.City</p>
+                <p>@item.Postcode</p>
+                <p>@item.Phone</p>
+                <form class="address-buttons" method="post">
+                    <a class="update-btn" asp-page="./Edit" asp-route-id=@item.Id>Редактировать</a>
+                    <button class="delete-btn" asp-page="./Delete" asp-route-id=@item.Id>Удалить</button>
+                </form>
+            </div>
+        }
+    </div>
+</div>

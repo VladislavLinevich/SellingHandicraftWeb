@@ -1,0 +1,36 @@
+﻿@page
+@model HandmadeWeb.Areas.Profile.Pages.Address.CreateModel
+
+@section Links {
+    <link rel="stylesheet" href="~/css/profile-form.css" />
+}
+<form class="profile-form" method="post">
+    <h2>Создать новый адрес</h2>
+    <div asp-validation-summary="ModelOnly" class="error"></div>
+
+    <label class="profile-form__label">Полное имя</label>
+    <input asp-for="Address.Fullname" class="profile-form__input" aria-required="true" placeholder="Укажите полное имя" />
+    <span asp-validation-for="Address.Fullname" class="error"></span>
+
+    <label class="profile-form__label">Улица</label>
+    <input asp-for="Address.Street" class="profile-form__input" aria-required="true" placeholder="Укажите улицу" />
+    <span asp-validation-for="Address.Street" class="error"></span>
+
+    <label class="profile-form__label">Город</label>
+    <input asp-for="Address.City" class="profile-form__input" aria-required="true" placeholder="Укажите город" />
+    <span asp-validation-for="Address.City" class="error"></span>
+
+    <label class="profile-form__label">Почтовый индекс</label>
+    <input asp-for="Address.Postcode" class="profile-form__input" aria-required="true" placeholder="Укажите почтовый индекс" />
+    <span asp-validation-for="Address.Postcode" class="error"></span>
+
+    <label class="profile-form__label">Телефон</label>
+    <input asp-for="Address.Phone" class="profile-form__input" aria-required="true" placeholder="Укажите телефон" />
+    <span asp-validation-for="Address.Phone" class="error"></span>
+
+    <button value="Create" class="profile-form__button" type="submit">Создать</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

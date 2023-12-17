@@ -1,0 +1,49 @@
+﻿@page
+@model HandmadeWeb.Areas.Profile.Pages.Reviews.IndexModel
+
+@section Links {
+    <link rel="stylesheet" href="~/css/profile.css" />
+    <link rel="stylesheet" href="~/css/profile-reviews.css" />
+}
+
+<div class="profile-nav">
+    <ul>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Account/Index">Аккаунт</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Address/Index">Адреса</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Orders/Index">Заказы</a></li>
+        <li><a class="profile-nav__link" asp-area="Profile" asp-page="/Sales/Index">Продажи</a></li>
+        <li><a class="profile-nav__link active" asp-area="Profile" asp-page="/Reviews/Index">Отзывы</a></li>
+    </ul>
+</div>
+<div class="profile-review-container">
+    <p class="profile-review-container__title"> Отзывы</p>
+    <div class="reviews">
+        @foreach (var item in Model.Review)
+        {
+            var product = Model.Products.Find(p => p.Id == item.ProductId);
+            <div class="review-container">
+                <p>
+                    @for (int i = 0; i < item.Rating; i++)
+                    {
+                        <span class="review-container__star-active"> &starf;</span>
+                    }
+                    @for (int i = item.Rating; i < 5; i++)
+                    {
+                        <span class="review-container__star-notactive"> &starf;</span>
+                    }
+                </p>
+                <p>@item.Text</p>
+                <div class="review-container__product">
+                    <img class="review-container__product__img" src="@Url.Content(product.Image)">
+                    <a class="review-container__product__name" asp-controller="Product" asp-action="Index" asp-route-productId=@product.Id> @product.Name</a>
+                    <p class="review-container__date"> @item.ReviewDate.ToString("dd MMM yyyy 'г.'", new System.Globalization.CultureInfo("ru-RU"))</p>
+                </div>
+                <form class="address-buttons" method="post">
+                    <a class="update-btn" asp-page="./Edit" asp-route-productId=@product.Id>Редактировать</a>
+                    <button class="delete-btn" asp-page="./Delete" asp-route-productId=@product.Id>Удалить</button>
+                </form>
+                <hr class="review-container__line">
+            </div>
+        }
+    </div>
+</div>

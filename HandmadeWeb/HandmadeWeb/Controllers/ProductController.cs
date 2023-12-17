@@ -25,6 +25,13 @@ namespace HandmadeWeb.Controllers
 
         public async Task<IActionResult> Index(int productId)
         {
+            /*var user2 = await _userManager.FindByIdAsync("3194e9cb-0b70-4553-8d8f-3c08f4049c94");
+
+            if (user2 != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user2);
+                var result = await _userManager.ResetPasswordAsync(user2, token, "123456");
+            }*/
             var product = dbContext.Product.Find(productId);
             if (product == null)
             {
